@@ -1,0 +1,275 @@
+.menu-root {
+    flex-grow: 1;
+    background-color: rgba(7, 12, 19, 0.18);
+}
+
+.menu-atmosphere {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.glow {
+    position: absolute;
+    width: 620px;
+    height: 620px;
+    border-top-left-radius: 320px;
+    border-top-right-radius: 320px;
+    border-bottom-left-radius: 320px;
+    border-bottom-right-radius: 320px;
+    opacity: 0.24;
+}
+
+.glow-blue {
+    top: -14%;
+    right: 8%;
+    background-color: rgba(78, 131, 185, 0.9);
+}
+
+.glow-amber {
+    bottom: -8%;
+    left: 28%;
+    background-color: rgba(196, 119, 68, 0.82);
+}
+
+.menu-layout {
+    flex-grow: 1;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+    padding-left: 42px;
+    padding-right: 42px;
+    padding-top: 36px;
+    padding-bottom: 36px;
+}
+
+.menu-left-rail {
+    width: 420px;
+    max-width: 42%;
+    padding: 28px;
+    border-top-left-radius: 28px;
+    border-top-right-radius: 28px;
+    border-bottom-left-radius: 28px;
+    border-bottom-right-radius: 28px;
+    background-color: rgba(10, 15, 23, 0.72);
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-left-color: rgba(255, 255, 255, 0.08);
+    border-right-color: rgba(255, 255, 255, 0.08);
+    border-top-color: rgba(255, 255, 255, 0.08);
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.menu-title {
+    font-size: 44px;
+    -unity-font-style: bold;
+    color: rgb(245, 240, 230);
+    letter-spacing: 2px;
+}
+
+.menu-subtitle {
+    margin-top: 10px;
+    font-size: 19px;
+    color: rgb(238, 220, 184);
+    white-space: normal;
+}
+
+.menu-copy {
+    margin-top: 18px;
+    color: rgb(201, 209, 219);
+    white-space: normal;
+    font-size: 15px;
+}
+
+.left-rail-actions {
+    margin-top: 34px;
+}
+
+.menu-primary-button,
+.menu-secondary-button {
+    min-height: 46px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+}
+
+.menu-primary-button {
+    background-color: rgb(226, 168, 106);
+    color: rgb(19, 22, 28);
+}
+
+.menu-secondary-button {
+    background-color: rgba(255, 255, 255, 0.08);
+    color: rgb(231, 236, 241);
+}
+
+.compact-button {
+    width: 170px;
+}
+
+.menu-right-caption {
+    width: 380px;
+    max-width: 34%;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.scene-caption {
+    padding: 18px 20px;
+    border-top-left-radius: 22px;
+    border-top-right-radius: 22px;
+    border-bottom-left-radius: 22px;
+    border-bottom-right-radius: 22px;
+    background-color: rgba(9, 13, 20, 0.62);
+    color: rgb(228, 232, 238);
+    white-space: normal;
+    font-size: 15px;
+    max-width: 100%;
+}
+
+.mission-panel,
+.modal-root {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(5, 8, 13, 0.74);
+}
+
+.mission-panel-card,
+.modal-card {
+    width: 980px;
+    max-width: 86%;
+    max-height: 82%;
+    padding: 28px;
+    border-top-left-radius: 28px;
+    border-top-right-radius: 28px;
+    border-bottom-left-radius: 28px;
+    border-bottom-right-radius: 28px;
+    background-color: rgba(10, 14, 21, 0.96);
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-left-color: rgba(255, 255, 255, 0.10);
+    border-right-color: rgba(255, 255, 255, 0.10);
+    border-top-color: rgba(255, 255, 255, 0.10);
+    border-bottom-color: rgba(255, 255, 255, 0.10);
+}
+
+.mission-panel-header,
+.warning-actions {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mission-panel-title,
+.modal-title {
+    font-size: 30px;
+    -unity-font-style: bold;
+    color: rgb(246, 239, 224);
+}
+
+.recommended-label {
+    margin-top: 10px;
+    color: rgb(231, 211, 172);
+}
+
+.mission-timeline {
+    margin-top: 18px;
+    flex-grow: 1;
+}
+
+.mission-tile {
+    margin-bottom: 14px;
+    padding: 20px;
+    align-items: flex-start;
+    background-color: rgba(18, 24, 33, 0.88);
+    border-left-width: 3px;
+    border-right-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-right-color: rgba(255, 255, 255, 0.08);
+    border-top-color: rgba(255, 255, 255, 0.08);
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+}
+
+.mission-order {
+    color: rgb(202, 212, 224);
+    font-size: 12px;
+}
+
+.mission-title {
+    margin-top: 6px;
+    font-size: 28px;
+    -unity-font-style: bold;
+    color: rgb(246, 240, 228);
+}
+
+.mission-headline {
+    margin-top: 6px;
+    color: rgb(236, 219, 182);
+    font-size: 16px;
+    white-space: normal;
+}
+
+.mission-description {
+    margin-top: 10px;
+    color: rgb(208, 215, 225);
+    white-space: normal;
+    font-size: 14px;
+}
+
+.mission-tag {
+    margin-top: 12px;
+    padding: 6px 10px;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
+    background-color: rgba(231, 184, 117, 0.16);
+    color: rgb(245, 224, 186);
+}
+
+.mission-tag--complete {
+    background-color: rgba(109, 181, 129, 0.16);
+    color: rgb(191, 235, 201);
+}
+
+.settings-row {
+    margin-top: 14px;
+}
+
+.settings-label {
+    color: rgb(240, 232, 220);
+    margin-bottom: 8px;
+}
+
+.settings-input {
+    margin-bottom: 8px;
+}
+
+.warning-card {
+    width: 720px;
+}
+
+.warning-body {
+    margin-top: 12px;
+    color: rgb(221, 226, 233);
+    white-space: normal;
+}

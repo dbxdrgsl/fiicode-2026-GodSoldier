@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fda448681a985e47bee0dbbdbb0af02, type: 3}
+  m_Name: GodSoldierMissionCatalog
+  m_EditorClassIdentifier: Assembly-CSharp::GodSoldier.GodSoldierMissionCatalog
+  missions:
+  - missionId: descent
+    displayName: Descent
+    headline: The bond is forged in a dying trench.
+    description: The God descends, revives the Soldier, and the pair learn to move
+      as one through ruin, dream-space, and the first breach of war.
+    recommendedOrder: 1
+    sceneName: GodSoldier_Descent
+    outOfOrderWarning: This mission is the beginning of the campaign and the strongest
+      place to start.
+    allowPublicMatch: 1
+    allowPrivateMatch: 1
+    maxHumanPlayers: 2
+    accentColor: {r: 0.82, g: 0.61, b: 0.36, a: 1}
+    publicSessionSettings: {fileID: 11400000, guid: 2d2f9039aa707b1459853699580e2a5d, type: 2}
+    privateSessionSettings: {fileID: 11400000, guid: fed8a7fe6b3412a4c9f47e85e9d6b705, type: 2}
+  - missionId: war-trial
+    displayName: War Trial
+    headline: A corrupted mirror pair descends to break the bond.
+    description: The God and Soldier face a scripted raid-like duel against a false
+      God and a corrupted Soldier, with attack phases and lesser war spirits between
+      them.
+    recommendedOrder: 2
+    sceneName: GodSoldier_WarTrial
+    outOfOrderWarning: War Trial lands harder once Descent has introduced the bond
+      and its rhythm.
+    allowPublicMatch: 1
+    allowPrivateMatch: 1
+    maxHumanPlayers: 2
+    accentColor: {r: 0.67, g: 0.34, b: 0.3, a: 1}
+    publicSessionSettings: {fileID: 11400000, guid: c6d9d29256788e244acb2fe70d3d42bc, type: 2}
+    privateSessionSettings: {fileID: 11400000, guid: 8ff3feb0ae61a244fa39749dd46fdd28, type: 2}
+  - missionId: judgment
+    displayName: Judgment
+    headline: The war slows down long enough to demand a final choice.
+    description: The pair enter a narrative judgment space where choices, chambers,
+      and an assassination climax decide whether peace is imposed or earned.
+    recommendedOrder: 3
+    sceneName: GodSoldier_Judgment
+    outOfOrderWarning: Judgment is written as the end of the early campaign timeline.
+    allowPublicMatch: 1
+    allowPrivateMatch: 1
+    maxHumanPlayers: 2
+    accentColor: {r: 0.41, g: 0.53, b: 0.83, a: 1}
+    publicSessionSettings: {fileID: 11400000, guid: 322fbf7b7fc1de04ca6e6717d76b959a, type: 2}
+    privateSessionSettings: {fileID: 11400000, guid: cbb5cdb958c49b149acee00355c22c79, type: 2}

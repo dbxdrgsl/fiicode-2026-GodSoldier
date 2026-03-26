@@ -1,0 +1,82 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="Lobby.uss" />
+    <ui:VisualElement class="lobby-root">
+        <ui:VisualElement class="lobby-shell">
+            <ui:VisualElement name="room-stage" class="stage-shell">
+                <ui:VisualElement class="stage-main-column">
+                    <ui:Label name="mission-title-label" text="Descent" class="lobby-title" />
+                    <ui:Label name="mission-headline-label" text="The bond is forged in a dying trench." class="mission-headline" />
+                    <ui:Label name="mission-description-label" text="Mission briefing." class="mission-description" />
+                    <ui:Label name="recommended-order-label" text="Timeline position: Mission 1" class="recommended-order" />
+
+                    <ui:VisualElement class="match-mode-row">
+                        <ui:Button name="public-match-button" text="Public Match" class="match-mode-button" />
+                        <ui:Button name="private-match-button" text="Private Match" class="match-mode-button" />
+                    </ui:VisualElement>
+
+                    <ui:Label name="room-status-label" text="Create or join a room to continue." class="status-label room-status-label" />
+                    <ui:Label name="room-player-count-label" text="Players in room: 0 / 2" class="players-label room-player-count-label" />
+
+                    <ui:VisualElement name="match-panel-root" class="match-panel-root" />
+                    <ui:VisualElement name="current-session-root" class="current-session-root" />
+                </ui:VisualElement>
+
+                <ui:VisualElement class="stage-side-column">
+                    <ui:VisualElement class="side-card">
+                        <ui:Label text="Room Setup" class="section-title" />
+                        <ui:Label text="First resolve the room. When both players are inside the same room, the game switches into character selection automatically." class="flow-copy" />
+                        <ui:Label text="Public rooms can be listed. Private rooms can still be joined by code." class="flow-copy flow-copy--muted" />
+                    </ui:VisualElement>
+
+                    <ui:VisualElement class="side-card side-card--accent">
+                        <ui:Label text="Next Step" class="section-title section-title--sm" />
+                        <ui:Label text="Character selection is a dedicated screen so future loadouts, weapons, relics, and attached objects can live there cleanly." class="flow-copy" />
+                    </ui:VisualElement>
+
+                    <ui:Button name="room-back-button" text="Back To Menu" class="back-button" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+
+            <ui:VisualElement name="character-stage" class="character-stage-shell" style="display: none;">
+                <ui:VisualElement class="character-hero-card">
+                    <ui:Label name="character-mission-label" text="Descent" class="character-mission-label" />
+                    <ui:Label name="character-headline-label" text="The bond is forged in a dying trench." class="character-headline-label" />
+                    <ui:Label text="Character Selection" class="character-stage-title" />
+                    <ui:Label name="character-status-label" text="Waiting for both players." class="status-label character-status-label" />
+                    <ui:Label name="character-hint-label" text="Choose your class when the room is ready." class="role-hint character-hint" />
+                </ui:VisualElement>
+
+                <ui:VisualElement class="character-layout">
+                    <ui:VisualElement class="character-selection-column">
+                        <ui:VisualElement class="side-card">
+                            <ui:Label text="Choose The Bond" class="section-title" />
+                            <ui:Label name="player-roles-label" text="Connected players&#10;- None yet" class="players-label" />
+
+                            <ui:VisualElement class="role-grid">
+                                <ui:Button name="role-god-button" text="Select God" class="role-button god-button" />
+                                <ui:Button name="role-soldier-button" text="Select Soldier" class="role-button soldier-button" />
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+
+                        <ui:VisualElement class="footer-actions">
+                            <ui:Button name="start-button" text="Start Mission" class="start-button" />
+                            <ui:Button name="character-leave-button" text="Leave Room" class="back-button" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+
+                    <ui:VisualElement class="character-customization-column">
+                        <ui:VisualElement class="customization-card">
+                            <ui:Label text="Future Customization" class="section-title section-title--sm" />
+                            <ui:Label name="character-customization-label" text="Loadouts, attached relics, and weapon customization will appear here." class="flow-copy" />
+                        </ui:VisualElement>
+
+                        <ui:VisualElement class="customization-card customization-card--secondary">
+                            <ui:Label text="Class Identity" class="section-title section-title--sm" />
+                            <ui:Label text="God handles support, revelation, crafting, and future spiritual modifiers. Soldier handles weapons, mobility, and future physical kit choices." class="flow-copy flow-copy--muted" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

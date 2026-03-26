@@ -1,0 +1,69 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="MainMenu.uss" />
+    <ui:VisualElement name="menu-root" class="menu-root">
+        <ui:VisualElement class="menu-atmosphere">
+            <ui:VisualElement class="glow glow-blue" />
+            <ui:VisualElement class="glow glow-amber" />
+        </ui:VisualElement>
+
+        <ui:VisualElement class="menu-layout">
+            <ui:VisualElement class="menu-left-rail">
+                <ui:Label text="GOD SOLDIER" class="menu-title" />
+                <ui:Label text="A co-op war of spirit, flesh, and judgment." class="menu-subtitle" />
+                <ui:Label text="A God guides. A Soldier acts. Both decide what peace should cost." class="menu-copy" />
+
+                <ui:VisualElement class="left-rail-actions">
+                    <ui:Button name="play-button" text="Play" class="menu-primary-button" />
+                    <ui:Button name="settings-button" text="Settings" class="menu-secondary-button" />
+                    <ui:Button name="exit-button" text="Exit" class="menu-secondary-button" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+
+            <ui:VisualElement class="menu-right-caption">
+                <ui:Label text="Above the clouds, strategy becomes war. Below them, war becomes consequence." class="scene-caption" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <ui:VisualElement name="mission-panel" class="mission-panel">
+            <ui:VisualElement class="mission-panel-card">
+                <ui:VisualElement class="mission-panel-header">
+                    <ui:Label text="Mission Timeline" class="mission-panel-title" />
+                    <ui:Button name="missions-back-button" text="Back" class="menu-secondary-button compact-button" />
+                </ui:VisualElement>
+                <ui:Label name="recommended-label" text="Recommended first: Descent" class="recommended-label" />
+                <ui:ScrollView name="mission-timeline" class="mission-timeline" mode="Vertical" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <ui:VisualElement name="settings-modal" class="modal-root">
+            <ui:VisualElement class="modal-card">
+                <ui:Label text="Settings" class="modal-title" />
+                <ui:VisualElement class="settings-row">
+                    <ui:Label text="Graphics Quality" class="settings-label" />
+                    <ui:DropdownField name="quality-field" class="settings-input" />
+                </ui:VisualElement>
+                <ui:VisualElement class="settings-row">
+                    <ui:Label text="Master Volume" class="settings-label" />
+                    <ui:Slider name="volume-slider" low-value="0" high-value="1" value="0.75" class="settings-input" />
+                </ui:VisualElement>
+                <ui:VisualElement class="settings-row">
+                    <ui:Label text="Fullscreen" class="settings-label" />
+                    <ui:Toggle name="fullscreen-toggle" class="settings-input" />
+                </ui:VisualElement>
+                <ui:Button name="settings-close-button" text="Close" class="menu-primary-button compact-button" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <ui:VisualElement name="warning-modal" class="modal-root">
+            <ui:VisualElement class="modal-card warning-card">
+                <ui:Label text="Play Out Of Order?" class="modal-title" />
+                <ui:Label name="warning-label" text="This mission is later in the timeline." class="warning-body" />
+                <ui:VisualElement class="warning-actions">
+                    <ui:Button name="recommended-button" text="Recommended First" class="menu-primary-button compact-button" />
+                    <ui:Button name="play-anyway-button" text="Play Anyway" class="menu-secondary-button compact-button" />
+                    <ui:Button name="warning-close-button" text="Cancel" class="menu-secondary-button compact-button" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
