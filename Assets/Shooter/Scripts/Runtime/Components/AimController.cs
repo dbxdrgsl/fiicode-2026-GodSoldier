@@ -131,7 +131,7 @@ namespace Blocks.Gameplay.Shooter
         public override void OnNetworkSpawn()
         {
             base.OnNetworkSpawn();
-            m_MainCamera = Camera.main;
+            m_MainCamera = ResolveGameplayCamera();
 
             // Enable RigBuilder at runtime to avoid Edit mode warnings
             if (aimRig != null)
@@ -201,6 +201,11 @@ namespace Blocks.Gameplay.Shooter
         private void Update()
         {
             if (!IsOwner || !IsSpawned) return;
+
+            if (m_MainCamera == null || !m_MainCamera.isActiveAndEnabled)
+            {
+                m_MainCamera = ResolveGameplayCamera();
+            }
 
             if (Time.time >= m_TimeOfLastNetworkUpdate + (1f / maxNetworkUpdateRate))
             {
@@ -459,8 +464,32 @@ namespace Blocks.Gameplay.Shooter
 
         private Transform GetDefaultAimSource()
         {
+            if (m_MainCamera == null || !m_MainCamera.isActiveAndEnabled)
+            {
+                m_MainCamera = ResolveGameplayCamera();
+            }
+
             if (m_MainCamera != null) return m_MainCamera.transform;
             return aimTransform ?? transform;
+        }
+
+        private Camera ResolveGameplayCamera()
+        {
+            if (Camera.main != null)
+            {
+                return Camera.main;
+            }
+
+            var sceneCameras = FindObjectsByType<Camera>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+            foreach (var sceneCamera in sceneCameras)
+            {
+                if (sceneCamera != null && sceneCamera.isActiveAndEnabled)
+                {
+                    return sceneCamera;
+                }
+            }
+
+            return null;
         }
 
         private void UpdateAnimationRigging()

@@ -250,7 +250,6 @@ namespace Blocks.Gameplay.Shooter
             if (!coreStats.IsAlive ||
                 CurrentWeapon == null ||
                 !CurrentWeapon.CanFire() ||
-                !m_IsAiming ||
                 m_Animator.GetBool(k_IsSwitchingWeapon) ||
                 m_Animator.GetBool(k_AnimIDIsReloading)) return;
 

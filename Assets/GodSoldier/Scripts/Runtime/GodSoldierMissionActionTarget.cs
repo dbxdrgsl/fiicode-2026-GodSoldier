@@ -1,3 +1,5 @@
+using Blocks.Gameplay.Core;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace GodSoldier
@@ -7,6 +9,8 @@ namespace GodSoldier
     {
         [SerializeField] string actionId = "primary-action";
         [SerializeField] GodSoldierPlayerRole requiredRole = GodSoldierPlayerRole.None;
+        [SerializeField] bool enforceRoleRequirement;
+        [SerializeField] bool activateOnTriggerEnter = true;
         [SerializeField] Renderer targetRenderer;
         [SerializeField] Color idleColor = new(0.40f, 0.49f, 0.63f);
         [SerializeField] Color activeColor = new(0.90f, 0.77f, 0.46f);
@@ -29,7 +33,39 @@ namespace GodSoldier
 
         public bool TryHandlePrimaryActionLocal(ulong playerId, GodSoldierPlayerRole playerRole)
         {
-            if (requiredRole != GodSoldierPlayerRole.None && requiredRole != playerRole)
+            return TryActivate(playerId, playerRole);
+        }
+
+        public void SetHighlighted(bool highlighted)
+        {
+            ApplyTint(highlighted ? activeColor : idleColor);
+        }
+
+        void OnTriggerEnter(Collider other)
+        {
+            if (!activateOnTriggerEnter)
+            {
+                return;
+            }
+
+            var networkObject = other.GetComponentInParent<NetworkObject>();
+            if (networkObject == null || !networkObject.IsOwner)
+            {
+                return;
+            }
+
+            var playerState = other.GetComponentInParent<CorePlayerState>();
+            if (playerState == null)
+            {
+                return;
+            }
+
+            TryActivate(networkObject.OwnerClientId, playerState.PlayerRole);
+        }
+
+        bool TryActivate(ulong playerId, GodSoldierPlayerRole playerRole)
+        {
+            if (enforceRoleRequirement && requiredRole != GodSoldierPlayerRole.None && requiredRole != playerRole)
             {
                 return false;
             }
@@ -41,11 +77,6 @@ namespace GodSoldier
 
             GodSoldierMissionDirectorBase.Current.RequestAction(actionId, playerId);
             return true;
-        }
-
-        public void SetHighlighted(bool highlighted)
-        {
-            ApplyTint(highlighted ? activeColor : idleColor);
         }
 
         void ApplyTint(Color tint)

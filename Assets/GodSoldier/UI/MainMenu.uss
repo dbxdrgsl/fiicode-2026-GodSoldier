@@ -39,21 +39,21 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: stretch;
-    padding-left: 42px;
-    padding-right: 42px;
-    padding-top: 36px;
-    padding-bottom: 36px;
+    padding-left: 54px;
+    padding-right: 54px;
+    padding-top: 46px;
+    padding-bottom: 46px;
 }
 
 .menu-left-rail {
-    width: 420px;
-    max-width: 42%;
-    padding: 28px;
-    border-top-left-radius: 28px;
-    border-top-right-radius: 28px;
-    border-bottom-left-radius: 28px;
-    border-bottom-right-radius: 28px;
-    background-color: rgba(10, 15, 23, 0.72);
+    width: 360px;
+    max-width: 36%;
+    padding: 22px;
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+    background-color: rgba(10, 15, 23, 0.62);
     border-left-width: 1px;
     border-right-width: 1px;
     border-top-width: 1px;
@@ -65,39 +65,39 @@
 }
 
 .menu-title {
-    font-size: 44px;
+    font-size: 34px;
     -unity-font-style: bold;
     color: rgb(245, 240, 230);
-    letter-spacing: 2px;
+    letter-spacing: 1px;
 }
 
 .menu-subtitle {
-    margin-top: 10px;
-    font-size: 19px;
+    margin-top: 8px;
+    font-size: 15px;
     color: rgb(238, 220, 184);
     white-space: normal;
 }
 
 .menu-copy {
-    margin-top: 18px;
+    margin-top: 14px;
     color: rgb(201, 209, 219);
     white-space: normal;
-    font-size: 15px;
+    font-size: 13px;
 }
 
 .left-rail-actions {
-    margin-top: 34px;
+    margin-top: 24px;
 }
 
 .menu-primary-button,
 .menu-secondary-button {
-    min-height: 46px;
-    font-size: 16px;
-    margin-bottom: 10px;
-    border-top-left-radius: 16px;
-    border-top-right-radius: 16px;
-    border-bottom-left-radius: 16px;
-    border-bottom-right-radius: 16px;
+    min-height: 38px;
+    font-size: 13px;
+    margin-bottom: 8px;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
 }
 
 .menu-primary-button {
@@ -111,26 +111,26 @@
 }
 
 .compact-button {
-    width: 170px;
+    width: 144px;
 }
 
 .menu-right-caption {
-    width: 380px;
-    max-width: 34%;
+    width: 420px;
+    max-width: 32%;
     justify-content: flex-end;
     align-items: flex-end;
 }
 
 .scene-caption {
-    padding: 18px 20px;
-    border-top-left-radius: 22px;
-    border-top-right-radius: 22px;
-    border-bottom-left-radius: 22px;
-    border-bottom-right-radius: 22px;
-    background-color: rgba(9, 13, 20, 0.62);
+    padding: 14px 16px;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+    background-color: rgba(9, 13, 20, 0.48);
     color: rgb(228, 232, 238);
     white-space: normal;
-    font-size: 15px;
+    font-size: 13px;
     max-width: 100%;
 }
 
@@ -148,14 +148,14 @@
 
 .mission-panel-card,
 .modal-card {
-    width: 980px;
+    width: 920px;
     max-width: 86%;
     max-height: 82%;
-    padding: 28px;
-    border-top-left-radius: 28px;
-    border-top-right-radius: 28px;
-    border-bottom-left-radius: 28px;
-    border-bottom-right-radius: 28px;
+    padding: 22px;
+    border-top-left-radius: 22px;
+    border-top-right-radius: 22px;
+    border-bottom-left-radius: 22px;
+    border-bottom-right-radius: 22px;
     background-color: rgba(10, 14, 21, 0.96);
     border-left-width: 1px;
     border-right-width: 1px;
@@ -176,24 +176,25 @@
 
 .mission-panel-title,
 .modal-title {
-    font-size: 30px;
+    font-size: 22px;
     -unity-font-style: bold;
     color: rgb(246, 239, 224);
 }
 
 .recommended-label {
-    margin-top: 10px;
+    margin-top: 8px;
+    font-size: 12px;
     color: rgb(231, 211, 172);
 }
 
 .mission-timeline {
-    margin-top: 18px;
+    margin-top: 14px;
     flex-grow: 1;
 }
 
 .mission-tile {
-    margin-bottom: 14px;
-    padding: 20px;
+    margin-bottom: 10px;
+    padding: 15px;
     align-items: flex-start;
     background-color: rgba(18, 24, 33, 0.88);
     border-left-width: 3px;
@@ -203,45 +204,46 @@
     border-right-color: rgba(255, 255, 255, 0.08);
     border-top-color: rgba(255, 255, 255, 0.08);
     border-bottom-color: rgba(255, 255, 255, 0.08);
-    border-top-left-radius: 24px;
-    border-top-right-radius: 24px;
-    border-bottom-left-radius: 24px;
-    border-bottom-right-radius: 24px;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
 }
 
 .mission-order {
     color: rgb(202, 212, 224);
-    font-size: 12px;
+    font-size: 10px;
 }
 
 .mission-title {
-    margin-top: 6px;
-    font-size: 28px;
+    margin-top: 4px;
+    font-size: 22px;
     -unity-font-style: bold;
     color: rgb(246, 240, 228);
 }
 
 .mission-headline {
-    margin-top: 6px;
+    margin-top: 4px;
     color: rgb(236, 219, 182);
-    font-size: 16px;
+    font-size: 13px;
     white-space: normal;
 }
 
 .mission-description {
-    margin-top: 10px;
+    margin-top: 8px;
     color: rgb(208, 215, 225);
     white-space: normal;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .mission-tag {
-    margin-top: 12px;
-    padding: 6px 10px;
-    border-top-left-radius: 14px;
-    border-top-right-radius: 14px;
-    border-bottom-left-radius: 14px;
-    border-bottom-right-radius: 14px;
+    margin-top: 10px;
+    padding: 4px 8px;
+    font-size: 11px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
     background-color: rgba(231, 184, 117, 0.16);
     color: rgb(245, 224, 186);
 }
@@ -252,24 +254,26 @@
 }
 
 .settings-row {
-    margin-top: 14px;
+    margin-top: 10px;
 }
 
 .settings-label {
     color: rgb(240, 232, 220);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
+    font-size: 12px;
 }
 
 .settings-input {
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .warning-card {
-    width: 720px;
+    width: 620px;
 }
 
 .warning-body {
-    margin-top: 12px;
+    margin-top: 10px;
     color: rgb(221, 226, 233);
     white-space: normal;
+    font-size: 12px;
 }

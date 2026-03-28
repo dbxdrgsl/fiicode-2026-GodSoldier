@@ -389,7 +389,7 @@ namespace Blocks.Gameplay.Core
         /// </summary>
         private void SetupCinemachine()
         {
-            var mainCam = Camera.main;
+            var mainCam = ResolveGameplayCamera();
             if (mainCam == null)
             {
                 Debug.LogError("No main camera found in the scene. [CoreCameraController] requires a main camera.", this);
@@ -430,6 +430,35 @@ namespace Blocks.Gameplay.Core
                 m_RegisteredCameraModes.Add(instance);
                 m_InstantiatedCameraModes.Add(instance);
             }
+        }
+
+        private Camera ResolveGameplayCamera()
+        {
+            if (Camera.main != null)
+            {
+                return Camera.main;
+            }
+
+            var sceneCameras = FindObjectsByType<Camera>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+            foreach (var sceneCamera in sceneCameras)
+            {
+                if (sceneCamera == null || !sceneCamera.isActiveAndEnabled)
+                {
+                    continue;
+                }
+
+                if (sceneCamera.transform.IsChildOf(transform))
+                {
+                    continue;
+                }
+
+                // Gameplay scenes currently ship with overview cameras that are not tagged.
+                // Promote the first active scene camera so Cinemachine can drive it.
+                sceneCamera.tag = "MainCamera";
+                return sceneCamera;
+            }
+
+            return null;
         }
 
         #endregion

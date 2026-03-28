@@ -25,6 +25,7 @@ namespace GodSoldier
         [SerializeField] private UIDocument playerHudDocument;
         [SerializeField] private Renderer[] roleRenderers;
         [SerializeField] private float primaryActionRange = 2.4f;
+        [SerializeField] private bool enableMissionPrimaryActions;
 
         [Header("Soldier Tuning")]
         [SerializeField] private float soldierMoveSpeed = 4.5f;
@@ -88,7 +89,7 @@ namespace GodSoldier
                 HandleRoleChanged(corePlayerState.PlayerRole);
             }
 
-            if (IsOwner && onPrimaryActionPressed != null)
+            if (IsOwner && enableMissionPrimaryActions && onPrimaryActionPressed != null)
             {
                 onPrimaryActionPressed.RegisterListener(HandlePrimaryActionPressed);
             }
@@ -103,7 +104,7 @@ namespace GodSoldier
 
             SceneManager.activeSceneChanged -= HandleActiveSceneChanged;
 
-            if (IsOwner && onPrimaryActionPressed != null)
+            if (IsOwner && enableMissionPrimaryActions && onPrimaryActionPressed != null)
             {
                 onPrimaryActionPressed.UnregisterListener(HandlePrimaryActionPressed);
             }
@@ -177,7 +178,7 @@ namespace GodSoldier
             {
                 case GodSoldierPlayerRole.God:
                     ApplyMovement(godMoveSpeed, godSprintSpeed, godJumpHeight, godGravity);
-                    ApplyShooterState(false);
+                    ApplyShooterState(true);
                     ApplyTint(godTint);
                     break;
 
@@ -189,7 +190,7 @@ namespace GodSoldier
 
                 default:
                     ApplyMovement(m_DefaultMoveSpeed, m_DefaultSprintSpeed, m_DefaultJumpHeight, m_DefaultGravity);
-                    ApplyShooterState(false);
+                    ApplyShooterState(true);
                     ApplyTint(Color.white);
                     break;
             }
@@ -332,6 +333,10 @@ namespace GodSoldier
             if (cameraController.ActiveCameraMode != null)
             {
                 cameraController.SwitchCameraMode(cameraController.ActiveCameraMode.ModeName);
+                if (coreMovement != null)
+                {
+                    coreMovement.PlayerRotationMode = cameraController.CurrentPlayerRotationMode;
+                }
                 return;
             }
 
@@ -342,6 +347,10 @@ namespace GodSoldier
             }
 
             cameraController.SwitchCameraMode(registeredModes[0].ModeName);
+            if (coreMovement != null)
+            {
+                coreMovement.PlayerRotationMode = cameraController.CurrentPlayerRotationMode;
+            }
         }
 
         void ApplyRendererVisibility(bool visible)

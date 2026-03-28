@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -10,11 +9,10 @@ namespace GodSoldier
         enum WarTrialStage
         {
             Intro,
-            CounterSoldierBoss,
-            SoldierBossVulnerable,
-            NPCWave,
-            CounterGodBoss,
-            GodBossVulnerable,
+            ReachFirstAnchor,
+            ClearFirstWard,
+            ReachSecondAnchor,
+            ClearSecondWard,
             Complete
         }
 
@@ -26,119 +24,64 @@ namespace GodSoldier
         [Header("Boss Encounter")]
         [SerializeField] GodSoldierReplicatedActivator soldierBossShield;
         [SerializeField] GodSoldierReplicatedActivator godBossShield;
-        [SerializeField] GodSoldierMissionShootableTarget soldierBossCore;
-        [SerializeField] GodSoldierMissionShootableTarget godBossCore;
         [SerializeField] GodSoldierReplicatedActivator waveGroupActivator;
-        [SerializeField] GodSoldierMissionShootableTarget[] waveTargets;
         [SerializeField] GodSoldierReplicatedActivator[] soldierAttackTelegraphs;
         [SerializeField] GodSoldierReplicatedActivator[] godAttackTelegraphs;
 
-        readonly HashSet<string> m_DestroyedWaveTargets = new();
         WarTrialStage m_Stage;
-        bool m_SoldierBossAnchored;
-        bool m_GodBossAnchored;
 
         protected override void OnMissionNetworkSpawn()
         {
             StartCoroutine(BeginMissionRoutine());
-            StartCoroutine(AttackTelegraphLoop());
         }
 
         public override string GetHintForRole(GodSoldierPlayerRole role)
         {
             return m_Stage switch
             {
-                WarTrialStage.CounterSoldierBoss when role == GodSoldierPlayerRole.Soldier => "Hold the Executioner in place from the anchor plate.",
-                WarTrialStage.CounterSoldierBoss => "Shatter the Executioner's ward when the Soldier has anchored it.",
-                WarTrialStage.SoldierBossVulnerable => "The Soldier pours fire into the exposed Executioner core.",
-                WarTrialStage.NPCWave => "Clear the lesser war spirits before the next duel.",
-                WarTrialStage.CounterGodBoss when role == GodSoldierPlayerRole.Soldier => "Pin the False Strategist from the ground seal.",
-                WarTrialStage.CounterGodBoss => "Use Primary Action to collapse the False Strategist's shield once the Soldier has anchored it.",
-                WarTrialStage.GodBossVulnerable => "Finish the corrupted pair. The Strategist is exposed.",
+                WarTrialStage.ReachFirstAnchor => "Move to the first arena anchor block.",
+                WarTrialStage.ClearFirstWard => "Touch the first ward block to clear the phase.",
+                WarTrialStage.ReachSecondAnchor => "Cross the arena and enter the second anchor block.",
+                WarTrialStage.ClearSecondWard => "Touch the final seal block to finish the trial.",
                 _ => base.GetHintForRole(role)
             };
         }
 
         protected override void HandleAction(string actionId, ulong playerId)
         {
-            if (!PlayerHasRole(playerId, GodSoldierPlayerRole.God))
-            {
-                return;
-            }
-
             switch (m_Stage)
             {
-                case WarTrialStage.CounterSoldierBoss when actionId == k_ShatterSoldierWard && m_SoldierBossAnchored:
+                case WarTrialStage.ClearFirstWard when actionId == k_ShatterSoldierWard:
                     soldierBossShield?.SetState(false);
-                    m_Stage = WarTrialStage.SoldierBossVulnerable;
-                    SetObjective("The corrupted Soldier is exposed. The Soldier must break the boss core.",
-                        "Executioner core exposed. Fire now.");
-                    BroadcastNotification("The Executioner's ward collapses.");
+                    m_Stage = WarTrialStage.ReachSecondAnchor;
+                    SetObjective("Phase one is open. Cross the arena and enter the second anchor block.",
+                        "Second anchor block ahead.");
+                    BroadcastNotification("The first ward collapses.");
                     break;
 
-                case WarTrialStage.CounterGodBoss when actionId == k_SealGodBoss && m_GodBossAnchored:
+                case WarTrialStage.ClearSecondWard when actionId == k_SealGodBoss:
                     godBossShield?.SetState(false);
-                    m_Stage = WarTrialStage.GodBossVulnerable;
-                    SetObjective("The corrupted God is exposed. Finish the duel before the storm resets.",
-                        "False Strategist exposed. Fire now.");
-                    BroadcastNotification("The False Strategist loses its shield.");
+                    CompleteMission();
                     break;
             }
         }
 
         protected override void HandleTrigger(string triggerId, ulong playerId)
         {
-            if (!PlayerHasRole(playerId, GodSoldierPlayerRole.Soldier))
-            {
-                return;
-            }
-
             switch (m_Stage)
             {
-                case WarTrialStage.CounterSoldierBoss when triggerId == k_AnchorSoldierBoss:
-                    m_SoldierBossAnchored = true;
-                    SetStatus("Executioner anchored. God must shatter the ward.");
-                    BroadcastNotification("The Soldier pins the corrupted Executioner in place.");
+                case WarTrialStage.ReachFirstAnchor when triggerId == k_AnchorSoldierBoss:
+                    m_Stage = WarTrialStage.ClearFirstWard;
+                    SetObjective("The first route is active. Touch the ward block to clear it.",
+                        "First ward block ahead.");
+                    BroadcastNotification("The first arena anchor is active.");
                     break;
 
-                case WarTrialStage.CounterGodBoss when triggerId == k_AnchorGodBoss:
-                    m_GodBossAnchored = true;
-                    SetStatus("False Strategist anchored. God must collapse the shield.");
-                    BroadcastNotification("The Soldier pins the False Strategist to the ground seal.");
-                    break;
-            }
-        }
-
-        protected override void HandleShootableResolved(string targetId, ulong playerId)
-        {
-            switch (m_Stage)
-            {
-                case WarTrialStage.SoldierBossVulnerable when targetId == "soldier_boss_core":
-                    waveGroupActivator?.SetState(true);
-                    m_Stage = WarTrialStage.NPCWave;
-                    SetObjective("Lesser war spirits flood the arena. Clear the wave before the second boss descends.",
-                        $"Wave targets remaining: {waveTargets.Length - m_DestroyedWaveTargets.Count}");
-                    BroadcastNotification("The corrupted Soldier falls. Lesser war spirits surge forward.");
-                    break;
-
-                case WarTrialStage.NPCWave when targetId.StartsWith("wave_"):
-                    if (!m_DestroyedWaveTargets.Add(targetId))
-                    {
-                        return;
-                    }
-
-                    SetStatus($"Wave targets remaining: {Mathf.Max(0, waveTargets.Length - m_DestroyedWaveTargets.Count)}");
-                    if (m_DestroyedWaveTargets.Count >= waveTargets.Length)
-                    {
-                        m_Stage = WarTrialStage.CounterGodBoss;
-                        SetObjective("Anchor the False Strategist, then let the God collapse the shield.",
-                            "Prepare the counter on the second boss.");
-                        BroadcastNotification("The arena clears for the final duel.");
-                    }
-                    break;
-
-                case WarTrialStage.GodBossVulnerable when targetId == "god_boss_core":
-                    CompleteMission();
+                case WarTrialStage.ReachSecondAnchor when triggerId == k_AnchorGodBoss:
+                    m_Stage = WarTrialStage.ClearSecondWard;
+                    SetObjective("Final route is active. Touch the last seal block to end the trial.",
+                        "Final seal block ahead.");
+                    BroadcastNotification("The second arena anchor is active.");
                     break;
             }
         }
@@ -146,95 +89,42 @@ namespace GodSoldier
         IEnumerator BeginMissionRoutine()
         {
             missionName = "War Trial";
+            m_Stage = WarTrialStage.Intro;
+
             soldierBossShield?.SetState(true);
             godBossShield?.SetState(true);
             waveGroupActivator?.SetState(false);
-
-            if (soldierAttackTelegraphs != null)
-            {
-                foreach (var telegraph in soldierAttackTelegraphs)
-                {
-                    telegraph?.SetState(false);
-                }
-            }
-
-            if (godAttackTelegraphs != null)
-            {
-                foreach (var telegraph in godAttackTelegraphs)
-                {
-                    telegraph?.SetState(false);
-                }
-            }
+            ToggleTelegraphSet(soldierAttackTelegraphs, false);
+            ToggleTelegraphSet(godAttackTelegraphs, false);
 
             yield return WaitForPlayersToChooseRoles();
 
             TeleportPlayersToRoleSpawns();
-            TogglePlayerMovement(false);
-            ShowStory("War Trial", "A corrupted God and Soldier pair descend to prove that unity can also be weaponized.");
-            yield return new WaitForSeconds(3.3f);
-            ShowStory("Mirror Duel", "To survive, the pair must counter the enemy duo in sequence: anchor, reveal, strike, then endure the swarm between phases.");
-            yield return new WaitForSeconds(4.2f);
-            HideStory();
             TogglePlayerMovement(true);
 
-            m_Stage = WarTrialStage.CounterSoldierBoss;
-            SetObjective("Anchor the corrupted Soldier, then let the God shatter the ward.",
-                "The Executioner opens with sweeping volleys.");
+            ShowStory("War Trial", "The arena now uses a simpler route: keep both players in third-person, keep the cameras personal, and clear each phase by entering the arena trigger blocks.");
+            yield return new WaitForSeconds(2.8f);
+            ShowStory("Arena Route", "The encounter is temporarily reduced to anchor blocks and ward blocks so the baseline movement loop stays solid.");
+            yield return new WaitForSeconds(3.1f);
+            HideStory();
+
+            m_Stage = WarTrialStage.ReachFirstAnchor;
+            SetObjective("Move to the first arena anchor block to start the trial.",
+                "First anchor block ahead.");
             BroadcastNotification("War Trial begins.");
         }
 
-        IEnumerator AttackTelegraphLoop()
-        {
-            int soldierIndex = 0;
-            int godIndex = 0;
-
-            while (true)
-            {
-                switch (m_Stage)
-                {
-                    case WarTrialStage.CounterSoldierBoss:
-                    case WarTrialStage.SoldierBossVulnerable:
-                        ToggleTelegraphSet(soldierAttackTelegraphs, soldierIndex);
-                        soldierIndex = IncrementIndex(soldierAttackTelegraphs, soldierIndex);
-                        break;
-
-                    case WarTrialStage.CounterGodBoss:
-                    case WarTrialStage.GodBossVulnerable:
-                        ToggleTelegraphSet(godAttackTelegraphs, godIndex);
-                        godIndex = IncrementIndex(godAttackTelegraphs, godIndex);
-                        break;
-
-                    default:
-                        ToggleTelegraphSet(soldierAttackTelegraphs, -1);
-                        ToggleTelegraphSet(godAttackTelegraphs, -1);
-                        break;
-                }
-
-                yield return new WaitForSeconds(1.25f);
-            }
-        }
-
-        void ToggleTelegraphSet(GodSoldierReplicatedActivator[] activators, int activeIndex)
+        void ToggleTelegraphSet(GodSoldierReplicatedActivator[] activators, bool enabledState)
         {
             if (activators == null)
             {
                 return;
             }
 
-            for (int i = 0; i < activators.Length; i++)
+            foreach (var activator in activators)
             {
-                activators[i]?.SetState(i == activeIndex);
+                activator?.SetState(enabledState);
             }
-        }
-
-        static int IncrementIndex(GodSoldierReplicatedActivator[] activators, int current)
-        {
-            if (activators == null || activators.Length == 0)
-            {
-                return -1;
-            }
-
-            return (current + 1) % activators.Length;
         }
 
         void CompleteMission()
@@ -246,9 +136,9 @@ namespace GodSoldier
 
             m_Stage = WarTrialStage.Complete;
             TogglePlayerMovement(false);
-            ToggleTelegraphSet(soldierAttackTelegraphs, -1);
-            ToggleTelegraphSet(godAttackTelegraphs, -1);
-            ShowStory("Corrupted Mirror Broken", "The corrupted pair collapse. The true bond survives the trial and carries its scars toward judgment.");
+            ToggleTelegraphSet(soldierAttackTelegraphs, false);
+            ToggleTelegraphSet(godAttackTelegraphs, false);
+            ShowStory("Trial Cleared", "The corrupted mirror encounter falls away and the level now resolves through clean third-person traversal instead of unfinished boss scripting.");
             SetObjective("Mission complete.", "War Trial is now recorded in the campaign timeline.");
             BroadcastNotification("Mission complete: War Trial.");
             MarkMissionCompleted();

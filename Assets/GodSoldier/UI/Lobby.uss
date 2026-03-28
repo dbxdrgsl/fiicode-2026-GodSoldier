@@ -6,15 +6,15 @@
 }
 
 .lobby-shell {
-    width: 1360px;
+    width: 1480px;
     max-width: 95%;
-    min-height: 760px;
-    padding: 28px;
-    border-top-left-radius: 28px;
-    border-top-right-radius: 28px;
-    border-bottom-left-radius: 28px;
-    border-bottom-right-radius: 28px;
-    background-color: rgba(9, 13, 19, 0.94);
+    min-height: 720px;
+    padding: 24px;
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+    background-color: rgba(9, 13, 19, 0.88);
     border-left-width: 1px;
     border-right-width: 1px;
     border-top-width: 1px;
@@ -36,56 +36,58 @@
 
 .stage-main-column {
     flex-grow: 1;
-    margin-right: 24px;
+    margin-right: 34px;
 }
 
 .stage-side-column {
-    width: 360px;
+    width: 410px;
 }
 
 .lobby-title,
 .character-mission-label {
-    font-size: 40px;
+    font-size: 28px;
     -unity-font-style: bold;
     color: rgb(245, 238, 226);
 }
 
 .mission-headline,
 .character-headline-label {
-    margin-top: 8px;
+    margin-top: 6px;
     color: rgb(238, 217, 177);
-    font-size: 18px;
+    font-size: 14px;
     white-space: normal;
 }
 
 .mission-description {
-    margin-top: 14px;
+    margin-top: 10px;
     color: rgb(209, 216, 225);
-    font-size: 15px;
+    font-size: 12px;
     white-space: normal;
 }
 
 .recommended-order {
-    margin-top: 14px;
+    margin-top: 10px;
     color: rgb(244, 227, 191);
     white-space: normal;
+    font-size: 11px;
 }
 
 .match-mode-row {
     flex-direction: row;
-    margin-top: 22px;
+    margin-top: 18px;
 }
 
 .match-mode-button {
     flex-grow: 1;
-    min-height: 42px;
+    min-height: 36px;
     margin-right: 10px;
-    border-top-left-radius: 16px;
-    border-top-right-radius: 16px;
-    border-bottom-left-radius: 16px;
-    border-bottom-right-radius: 16px;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
     background-color: rgba(255, 255, 255, 0.08);
     color: rgb(234, 238, 243);
+    font-size: 12px;
 }
 
 .match-mode-button--selected {
@@ -95,47 +97,49 @@
 
 .match-panel-root,
 .current-session-root {
-    margin-top: 16px;
+    margin-top: 14px;
 }
 
 .status-label,
 .role-hint,
 .players-label,
 .flow-copy {
-    margin-top: 10px;
+    margin-top: 8px;
     color: rgb(206, 214, 223);
     white-space: normal;
+    font-size: 12px;
 }
 
 .room-status-label,
 .character-status-label {
-    margin-top: 18px;
+    margin-top: 14px;
 }
 
 .room-player-count-label {
     color: rgb(236, 223, 189);
+    font-size: 11px;
 }
 
 .section-title {
-    font-size: 24px;
+    font-size: 18px;
     -unity-font-style: bold;
     color: rgb(245, 238, 226);
 }
 
 .section-title--sm {
-    font-size: 20px;
+    font-size: 15px;
 }
 
 .side-card,
 .customization-card,
 .character-hero-card {
-    padding: 20px;
-    margin-bottom: 16px;
-    border-top-left-radius: 22px;
-    border-top-right-radius: 22px;
-    border-bottom-left-radius: 22px;
-    border-bottom-right-radius: 22px;
-    background-color: rgba(255, 255, 255, 0.045);
+    padding: 16px;
+    margin-bottom: 14px;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+    background-color: rgba(255, 255, 255, 0.038);
     border-left-width: 1px;
     border-right-width: 1px;
     border-top-width: 1px;
@@ -160,8 +164,8 @@
 }
 
 .character-stage-title {
-    margin-top: 18px;
-    font-size: 28px;
+    margin-top: 14px;
+    font-size: 21px;
     -unity-font-style: bold;
     color: rgb(245, 238, 226);
 }
@@ -169,35 +173,36 @@
 .character-layout {
     flex-grow: 1;
     flex-direction: row;
+    margin-top: 6px;
 }
 
 .character-selection-column {
     flex-grow: 1;
-    margin-right: 18px;
+    margin-right: 28px;
 }
 
 .character-customization-column {
-    width: 420px;
+    width: 400px;
 }
 
 .role-grid {
     flex-direction: row;
-    margin-top: 18px;
-    margin-bottom: 8px;
+    margin-top: 14px;
+    margin-bottom: 6px;
 }
 
 .role-button {
     flex-grow: 1;
-    min-height: 96px;
-    font-size: 19px;
+    min-height: 74px;
+    font-size: 15px;
     border-left-width: 2px;
     border-right-width: 2px;
     border-top-width: 2px;
     border-bottom-width: 2px;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
     border-left-color: rgba(255, 255, 255, 0.18);
     border-right-color: rgba(255, 255, 255, 0.18);
     border-top-color: rgba(255, 255, 255, 0.18);
@@ -243,17 +248,18 @@
 
 .footer-actions {
     flex-direction: row;
-    margin-top: 18px;
+    margin-top: 14px;
 }
 
 .start-button,
 .back-button {
     flex-grow: 1;
-    min-height: 46px;
-    border-top-left-radius: 16px;
-    border-top-right-radius: 16px;
-    border-bottom-left-radius: 16px;
-    border-bottom-right-radius: 16px;
+    min-height: 38px;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
+    font-size: 12px;
 }
 
 .start-button {
@@ -265,4 +271,45 @@
 .back-button {
     background-color: rgba(255, 255, 255, 0.08);
     color: rgb(232, 236, 241);
+}
+
+.blocks-modal {
+    padding: 14px;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    background-color: rgba(255, 255, 255, 0.032);
+}
+
+.blocks-header {
+    font-size: 14px;
+}
+
+.blocks-header--sm {
+    font-size: 12px;
+}
+
+.blocks-label {
+    font-size: 11px;
+}
+
+.blocks-element--space-bottom {
+    margin-bottom: 8px;
+}
+
+.blocks-element--space-right {
+    margin-right: 8px;
+}
+
+.blocks-copy-session--header > .blocks-button,
+.blocks-button {
+    min-height: 30px;
+    font-size: 11px;
+}
+
+.blocks-copy-session--header > .blocks-textfield,
+.blocks-textfield {
+    min-height: 30px;
+    font-size: 11px;
 }

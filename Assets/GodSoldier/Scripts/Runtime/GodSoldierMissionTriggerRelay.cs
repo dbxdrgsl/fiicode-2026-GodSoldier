@@ -10,6 +10,7 @@ namespace GodSoldier
     {
         [SerializeField] string triggerId = "mission-trigger";
         [SerializeField] GodSoldierPlayerRole requiredRole = GodSoldierPlayerRole.None;
+        [SerializeField] bool enforceRoleRequirement;
         [SerializeField] bool hideAfterTrigger;
 
         void Awake()
@@ -19,18 +20,23 @@ namespace GodSoldier
 
         void OnTriggerEnter(Collider other)
         {
-            if (!other.TryGetComponent<NetworkObject>(out var networkObject) || !networkObject.IsOwner)
+            var networkObject = other.GetComponentInParent<NetworkObject>();
+            if (networkObject == null || !networkObject.IsOwner)
             {
                 return;
             }
 
-            var playerState = other.GetComponent<CorePlayerState>();
-            if (requiredRole != GodSoldierPlayerRole.None && (playerState == null || playerState.PlayerRole != requiredRole))
+            var playerState = other.GetComponentInParent<CorePlayerState>();
+            if (enforceRoleRequirement && requiredRole != GodSoldierPlayerRole.None && (playerState == null || playerState.PlayerRole != requiredRole))
             {
                 return;
             }
 
             GodSoldierMissionDirectorBase.Current?.RequestTrigger(triggerId, networkObject.OwnerClientId);
+            if (hideAfterTrigger)
+            {
+                HideForEveryone();
+            }
         }
 
         public void HideForEveryone()
